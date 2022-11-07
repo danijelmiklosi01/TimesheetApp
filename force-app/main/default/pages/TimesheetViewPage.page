@@ -1,0 +1,50 @@
+<apex:page controller="viewTimesheet"  showHeader="false" sidebar="false" lightningStylesheets="true" >
+    <apex:slds />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+    <script>
+    $(document).ready(function(){
+        $(".bPageBlock").css("background-color","#89CFEF");
+    });
+    </script>
+        <style >
+        .name { font-size: 18px;
+            color: #89CFEF;
+  font-family: 'georgia';
+  font-weight: bold;
+  text-align: center;}
+  .bPageBlock{
+    height:880px;
+    width:1860px;
+  }
+    </style>
+        <div>
+        <apex:form>
+            <apex:outputPanel>
+            <apex:pageBlock title="Timesheet List" mode="edit">  
+                  
+                <apex:pageBlockSection columns="1" >
+                    
+                    <div class="name">
+                        
+                    <p>Hello, {! $User.FirstName & ' ' & $User.LastName } ({! IF($User.isActive, $User.Username, 'inactive') })</p>
+                </div>
+                </apex:pageBlockSection>
+                <apex:pageBlockTable value="{!ts}" var="t" >
+                    <!-- Values that display the entered timesheets from the database -->
+                    <apex:column value="{!t.Project_Name__c}"/ >
+                    <apex:column value="{!t.Employee__c}"/>
+                    <apex:column value="{!t.Task_Date__c}"/>
+                    <apex:column value="{!t.Total_Hours__c}"/>
+                    <apex:column value="{!t.Task_Description__c}"/>
+                </apex:pageBlockTable>
+                    <apex:pageBlockButtons location="TOP" style="float:right">
+                        <!--a command button with an action that goes to the TimesheetCreatePage-->
+                        <apex:commandButton styleclass="slds-button slds-button_brand" value="New Entry" action="{!back}"/>
+                    </apex:pageBlockButtons>
+                  
+            </apex:pageBlock>
+        </apex:outputPanel>
+        </apex:form>
+    
+    </div>
+</apex:page>
